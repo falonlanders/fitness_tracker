@@ -11,7 +11,7 @@ const salt = 10;
 
 
 // GET /ROUTINES
-router.get('/', async (res, next) => {
+routinesRouter.get('/', async (res, next) => {
     try {
         const ROUTINES = await getAllPublicRoutines();
         res.send(ROUTINES);
@@ -23,7 +23,7 @@ router.get('/', async (res, next) => {
 })
 
 //POST /ROUTINES(*)
-router.post('/', async (req, res, next) => {
+routinesRouter.post('/', async (req, res, next) => {
     try {
         const { name, goal } = req.body;
         const CREATED = await createRoutine({ creatorId, public, name, goal });
@@ -36,7 +36,7 @@ router.post('/', async (req, res, next) => {
 });
 
 // PATCH /ROUTINES/ROUTINEID
-router.patch('/:routineId', async (req, res, next) => {
+routinesRouter.patch('/:routineId', async (req, res, next) => {
     try {
         const { name, goal } = req.body;
         const UPDATED = await updateRoutine({ id, public, name, goal })
@@ -49,7 +49,7 @@ router.patch('/:routineId', async (req, res, next) => {
 });
 
 // DELETE /ROUTINES/ROUTINEID
-router.delete('/:routineId', async (req, res, next) => {
+routineRouter.delete('/:routineId', async (req, res, next) => {
     try {
         const DELETE = await getRoutineById(req.params.routineId);
         (DELETE && DELETE.creatorId === req.user.id) {
@@ -65,7 +65,7 @@ router.delete('/:routineId', async (req, res, next) => {
 });
 
 // POST /ROUTINES/:ROUTINEID/ACTIVITIES
-router.post('/:routineId/activities', async (req, res, next) => {
+routinesRouter.post('/:routineId/activities', async (req, res, next) => {
     try {
         const { routineId, activityId, count, duration } = req.body;
         const ATTACH = await addActivityToRoutine({ routineId, activityId, count, duration });

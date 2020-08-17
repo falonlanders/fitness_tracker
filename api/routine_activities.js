@@ -10,7 +10,7 @@ const salt = 10;
 const routineActivitiesRouter = express.Router();
 
 // PATCH /ROUTINE_ACTIVITIES/:ROUTINEACTIVITYID(**)
-router.patch('/:routineActivityId', async (req, res, next) => {
+routineActivitiesRouter.patch('/:routineActivityId', async (req, res, next) => {
     try {
         const { count, duration } = req.body;
         const UPDATED = await updateRoutineActivity({ count, duration })
@@ -23,7 +23,7 @@ router.patch('/:routineActivityId', async (req, res, next) => {
 });
 
 // DELETE /ROUTINE_ACTIVITIES/ROUTINEACTIVITYID(**)
-router.delete('/:routineActivityId', async (req, res, next) => {
+routineActivitiesRouter.delete('/:routineActivityId', async (req, res, next) => {
     try {
         const DELETE = await destroyRoutineActivity(req.params.routineId);
         (DELETE && DELETE.creatorId === req.user.id) {
